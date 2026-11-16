@@ -1,0 +1,154 @@
+/* Dominó (base crua): mesa, peças e mão. Reaproveita .screen.game, .gbar, .felt, .nameplate e .mine do Uno. */
+.dtable {
+    position: relative;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 8px;
+}
+.dtable .felt {
+    inset: 0;
+    border-radius: 24px;
+}
+.dtop,
+.dboard {
+    position: relative;
+    z-index: 1;
+}
+.dtop {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+.dboard {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-content: center;
+    justify-content: center;
+    padding: 8px 16px;
+    overflow: auto;
+}
+.dpiece {
+    --ps: 46px;
+    display: flex;
+    background: #f4efe2;
+    border: 1px solid #3a3326;
+    border-radius: calc(var(--ps) * 0.18);
+    box-shadow: 0 2px 5px #0007;
+    color: #1b1b1b;
+    flex: none;
+}
+.dpiece.v {
+    flex-direction: column;
+    width: var(--ps);
+}
+.dpiece.h {
+    flex-direction: row;
+    height: var(--ps);
+}
+.dhalf {
+    width: var(--ps);
+    height: var(--ps);
+    padding: calc(var(--ps) * 0.14);
+    box-sizing: border-box;
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+}
+.dpiece.v .dhalf + .dhalf {
+    border-top: 1px solid #3a3326;
+}
+.dpiece.h .dhalf + .dhalf {
+    border-left: 1px solid #3a3326;
+}
+.dhalf i {
+    border-radius: 50%;
+}
+.dhalf i.on {
+    background: #1b1b1b;
+}
+.dpiece.back {
+    background: linear-gradient(135deg, #2b4a8a, #1c2f5c);
+    border-color: #0d1630;
+}
+.dpiece.back .dhalf {
+    height: calc(var(--ps) * 0.9);
+}
+.dopp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+.dopp.turn .nameplate {
+    border-color: var(--gold);
+}
+.dbacks {
+    display: flex;
+    gap: 2px;
+}
+.dboard {
+    flex-wrap: nowrap;
+    gap: 2px;
+    overflow-x: auto;
+    justify-content: safe center;
+}
+.dghost {
+    flex: none;
+    width: calc(var(--ps) * 2);
+    height: var(--ps);
+    border: 2px dashed var(--gold);
+    border-radius: calc(var(--ps) * 0.18);
+    background: #ffcc3330;
+    color: var(--gold);
+    font-size: calc(var(--ps) * 0.5);
+    cursor: pointer;
+    animation: dpulse 0.9s ease-in-out infinite alternate;
+}
+@keyframes dpulse {
+    to {
+        background: #ffcc3366;
+    }
+}
+.dpiece.arrive-me {
+    animation: darrive-me 0.5s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+.dpiece.arrive-op {
+    animation: darrive-op 0.5s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+@keyframes darrive-me {
+    from {
+        transform: translateY(40vh) scale(1.5);
+        opacity: 0.4;
+    }
+}
+@keyframes darrive-op {
+    from {
+        transform: translateY(-30vh) scale(1.2);
+        opacity: 0.4;
+    }
+}
+.dend {
+    font-weight: 800;
+    color: var(--gold);
+}
+.dhand {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 6px;
+    justify-content: center;
+    padding: 18px 4px 4px;
+}
+.dtable {
+    padding: 4px;
+}
+.dboard {
+    padding: 8px 2px;
+}
+.dtop {
+    align-items: flex-start;
+}
